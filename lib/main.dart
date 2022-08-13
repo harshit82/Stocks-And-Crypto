@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark()
-          .copyWith(scaffoldBackgroundColor: const Color(backgroundColour)),
+          .copyWith(scaffoldBackgroundColor: const Color(scaffoldColour)),
       home: const Home(),
     );
   }

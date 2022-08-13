@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 class JSONObject {
-
   late Map<String, dynamic> jsonContents;
 
   JSONObject(String jsonString) {
@@ -16,7 +15,9 @@ class JSONObject {
       for (dynamic jsonValue in values) {
         try {
           return _get(key, jsonValue);
-        } catch (e) {}
+        } catch (e) {
+          e.toString();
+        }
       }
     }
     return null;
