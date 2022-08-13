@@ -10,22 +10,28 @@ class StockData extends StatefulWidget {
 }
 
 class _StockDataState extends State<StockData> {
-  late Future stockData;
+  BaseApi apiObject = BaseApi();
+
+  late Future stockData = apiObject.getStocksData(stocksIntraday, "IBM", oneMinute);
+
+  late Color containerColour;
+
+  late String symbolValue;
+  late String openValue;
+  late String closeValue;
+  late String highValue;
+  late String lowValue;
+  late String volumeValue;
 
   @override
   initState() {
     super.initState();
-    // fetch data to display
-    stockData = getStocksData(stocksIntraday, "IBM", oneMinute);
+    updateUI(stockData);
   }
 
-  late Color containerColour;
+  void updateUI(dynamic stockData) {
 
-  // String symbolValue = stockData.getString("Symbol");
-  // String openValue = stockData.getString("open");
-  // String closeValue = stockData.getString("close");
-  // String highValue = stockData.getString("high");
-  // String volumeValue = stockData.getString("volume");
+  } // intialize variables with the values from stock data
 
   @override
   Widget build(BuildContext context) {
@@ -44,28 +50,29 @@ class _StockDataState extends State<StockData> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Symbol", style: TextStyle(color: Color(symbolColour))),
-                Text("Volume"),
+                Text(symbolValue,
+                    style: const TextStyle(color: Color(symbolColour))),
+                Text(volumeValue),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  "High: ",
-                  style: TextStyle(color: Color(profitColour)),
+                  "High: $highValue",
+                  style: const TextStyle(color: Color(profitColour)),
                 ),
                 Text(
-                  "Low: ",
-                  style: TextStyle(color: Color(lossColour)),
+                  "Low: $lowValue",
+                  style: const TextStyle(color: Color(lossColour)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text("Open: "),
-                Text("Close: "),
+                Text("Open: $openValue"),
+                Text("Close: $closeValue"),
               ],
             )
           ],

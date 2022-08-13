@@ -10,22 +10,27 @@ class CryptoData extends StatefulWidget {
 }
 
 class _CryptoDataState extends State<CryptoData> {
-  late Future stockData;
+  BaseApi apiObject = BaseApi();
+
+  late Future cryptoData =
+      apiObject.getCryptoData(cryptoIntraday, "ETH", oneMinute, "USD");
+
+  late Color containerColour;
+
+  late String symbolValue;
+  late String marketValue;
+  late String highValue;
+  late String lowValue;
+  late String openValue;
+  late String closeValue;
 
   @override
   initState() {
     super.initState();
-    // fetch data to display
-    stockData = getCryptoData(cryptoIntraday, "ETH", oneMinute, "USD");
+    updateUI(cryptoData);
   }
 
-  late Color containerColour;
-
-  // String symbolValue = stockData.getString("Symbol");
-  // String openValue = stockData.getString("open");
-  // String closeValue = stockData.getString("close");
-  // String highValue = stockData.getString("high");
-  // String volumeValue = stockData.getString("volume");
+  void updateUI(dynamic cryptoData) {}
 
   @override
   Widget build(BuildContext context) {
@@ -44,28 +49,29 @@ class _CryptoDataState extends State<CryptoData> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Symbol", style: TextStyle(color: Color(symbolColour))),
-                Text("Market"),
+                Text(symbolValue,
+                    style: const TextStyle(color: Color(symbolColour))),
+                Text(marketValue),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  "High: ",
-                  style: TextStyle(color: Color(profitColour)),
+                  "High: $highValue",
+                  style: const TextStyle(color: Color(profitColour)),
                 ),
                 Text(
-                  "Low: ",
-                  style: TextStyle(color: Color(lossColour)),
+                  "Low: $lowValue",
+                  style: const TextStyle(color: Color(lossColour)),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text("Open: "),
-                Text("Close: "),
+                Text("Open: $openValue"),
+                Text("Close: $closeValue"),
               ],
             )
           ],
