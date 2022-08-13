@@ -1,29 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:stocks_and_crypto/BaseAPI.dart';
-import 'constants.dart';
+import 'package:stocks_and_crypto/constants.dart';
 
-class StockData extends StatefulWidget {
-  const StockData({Key? key}) : super(key: key);
+class CryptoData extends StatefulWidget {
+  const CryptoData({Key? key}) : super(key: key);
 
   @override
-  State<StockData> createState() => _StockDataState();
+  State<CryptoData> createState() => _CryptoDataState();
 }
 
-class _StockDataState extends State<StockData> {
-  late Future stockDataMap;
+class _CryptoDataState extends State<CryptoData> {
+  late Future stockData;
 
   @override
   initState() {
     super.initState();
-    stockDataMap = getStocksData(intraday, "IBM", oneMinute);
+    // fetch data to display
+    stockData = getCryptoData(cryptoIntraday, "ETH", oneMinute, "USD");
   }
 
   late Color containerColour;
 
+  // String symbolValue = stockData.getString("Symbol");
+  // String openValue = stockData.getString("open");
+  // String closeValue = stockData.getString("close");
+  // String highValue = stockData.getString("high");
+  // String volumeValue = stockData.getString("volume");
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(itemBuilder: (context, index) {
-      if (index % 2 == 0) {
+      // condition to change colour of the container based on index parity
+      if (index % 2 != 0) {
         containerColour = const Color(backgroundColour);
       } else {
         containerColour = const Color(scaffoldColour);
@@ -36,11 +44,8 @@ class _StockDataState extends State<StockData> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Symbol",
-                  style: TextStyle(color: Colors.yellowAccent),
-                ),
-                Text("Volume"),
+                Text("Symbol", style: TextStyle(color: Color(symbolColour))),
+                Text("Market"),
               ],
             ),
             Row(
