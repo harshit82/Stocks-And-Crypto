@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:stocks_and_crypto/StockData.dart';
+import 'package:stocks_and_crypto/stock/StockData.dart';
 
 class Stocks extends StatelessWidget {
   const Stocks({Key? key}) : super(key: key);

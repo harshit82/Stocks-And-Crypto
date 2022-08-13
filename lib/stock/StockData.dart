@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stocks_and_crypto/BaseAPI.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class StockData extends StatefulWidget {
   const StockData({Key? key}) : super(key: key);
